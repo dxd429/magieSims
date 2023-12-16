@@ -15,7 +15,7 @@ To access the example data, you need to install the `magpieData` data package fr
 
 ```R
 library(devtools)
-install_github("hadley/dplyr")
+install_github("dxd429/magpieData")
 ```
 
 ### Library Loading
