@@ -1,7 +1,9 @@
 
-# Alternative Workflow for DMR Detection
+# Workflow to obtain simulated data and apply DMR detection methods for power evaluation
 
-This document outlines an alternative workflow for users who wish to apply their chosen method for DMR (Differentially Methylated Regions) detection.
+This workflow acts as a complement to our R package `magpie`, providing an alternative way for users who wish to conduct power analysis using their DMR detection methods of choice. `magpie` currently includes the DMR testing methods `TRESS` and `exomePeak2`, and is available at https://bioconductor.org/packages/magpie/.
+
+Below, we present a detailed breakdown of data simulation and DMR testing.
 
 ## Getting Started
 
@@ -11,7 +13,7 @@ First, it's essential to load the necessary libraries and source the local funct
 
 ### Installing Example Data
 
-To access the example data, you need to install the `magpieData` data package from GitHub. Use the `devtools` package to do this:
+To access the example data, the data package `magpieData` needs to be installed from GitHub. Use the `devtools` package to do this:
 
 ```R
 library(devtools)
@@ -72,6 +74,7 @@ Dat_sims <- CountM_sim(
     thres = thres
  )
 ```
+Here, `Dat_sims` is a list containing two main elements, each representing simulated count matrices at different sequencing depths: `1x` and `2x`. Within each of these elements, there are four sub-lists corresponding to varying sample sizes per group—specifically 2, 3, 5, and 7, parameters defined in `Simulation Parameters`. For each combination of sequencing depth and sample size, currently, there's only one matrix since we set `nsim <- 1`, indicating a single iteration for each scenario. Had `nsim` been assigned a different value, the number of matrices in each sub-list would align with the value of `nsim`.
 
 ## Apply Testing Method
 
@@ -101,15 +104,17 @@ for (i in 1:length(Dat_sims[[1]])){
 
 ## Investigation and Plotting
 
-After applying the testing method, you can either perform your own analysis on the testing results or utilize the plotting functions available in the `magpie` package to create insightful line plots. The following code can be used for calculating power and generating plots:
+After applying the testing method, you can either perform your own analysis on the testing results or utilize the plotting functions available in the `magpie` package to create insightful line plots. The following code can be used for calculating power and generating a line plot for `FDR`:
 
 ```R
 Power.list <- Power.cal(
   PVALS = PVALS,
   idx.dmr = Dat_sims$flag,
-  N.reps = c(2, 3, 5, 7),
-  thre = c(0.01, 0.05, 0.1)
+  N.reps = N.reps ,
+  thre = thres
 )
 Power.list <- list("1x" = Power.list)
 plotRes(Power.list, value_option = "FDR")
 ```
+
+![FDR](images/fdr.pdf)

@@ -550,7 +550,7 @@ for (datas in c("GSE114150", "GSE46705", "GSE48037", "GSE47217", "GSE120024")){
   pdf(file = paste0("./UpdatedFigures/Alpha_violin_", datas, ".pdf"))
   print(ggplot(Alpha_df, aes(x=factor(1), y=Alpha)) + 
           geom_violin(fill="skyblue", color="darkblue") +  # Fill and border color
-          ylab(" ") +
+          ylab(expression(alpha)) +
           xlab(" ") +
           theme_bw() +
           theme_classic() +
@@ -559,9 +559,12 @@ for (datas in c("GSE114150", "GSE46705", "GSE48037", "GSE47217", "GSE120024")){
                 legend.position = "none",
                 axis.line = element_line(colour = "black", size = 0.8), 
                 axis.ticks = element_line(colour = "black", size = 0.8),
-                axis.ticks.length = unit(0.2, "cm")
+                axis.ticks.length = unit(0.2, "cm"),
+                axis.title.y = element_text(size = rel(3.5))
           ) +
-          scale_y_continuous(limits = c(-5,10))
+          scale_y_continuous(limits = c(-5,10)) +
+          geom_hline(yintercept = 0, color = "red", linetype = "dashed")
+          
         )
   dev.off()
   rm(allPara)
