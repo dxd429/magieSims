@@ -1,5 +1,5 @@
 
-# Workflow to obtain simulated data and apply DMR detection methods for power evaluation
+# MeRIP-seq data simulator and DMR testing power evaluator
 
 This workflow acts as a complement to our R package `magpie`, providing an alternative way for users who wish to conduct power analysis using their DMR detection methods of choice. `magpie` currently includes the DMR testing methods `TRESS` and `exomePeak2`, and is available at https://bioconductor.org/packages/magpie/.
 
@@ -118,3 +118,7 @@ plotRes(Power.list, value_option = "FDR")
 ```
 
 ![FDR](images/fdr.png)
+
+## Citation
+
+To be updated...
