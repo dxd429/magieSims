@@ -117,4 +117,4 @@ Power.list <- list("1x" = Power.list)
 plotRes(Power.list, value_option = "FDR")
 ```
 
-![FDR](images/fdr.pdf)
+![FDR](images/fdr.png)
